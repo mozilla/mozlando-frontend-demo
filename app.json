@@ -1,6 +1,6 @@
 {
-  "name": "react-redux-universal-hot-example",
-  "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
+  "name": "mozlando-frontend-demo",
+  "description": "Example of addons frontend using react, redux and universal server-rendering.",
   "repository": "https://github.com/erikras/react-redux-universal-hot-example",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": [

@@ -15,8 +15,8 @@ module.exports = Object.assign({
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
   app: {
-    title: 'React Redux Example',
-    description: 'All the modern best practices in one example.',
+    title: 'Mozlando Frontend demo',
+    description: 'Example of addons frontend using react, redux and universal server-rendering.',
     meta: {
       charSet: 'utf-8',
       property: {
