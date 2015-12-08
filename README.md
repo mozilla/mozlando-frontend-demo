@@ -13,7 +13,7 @@ The idea to it to try and do the following:
 ## Getting started
 
 * You'll need `nvm` + `node 4.x` + `npm 3.x` to be able to install the node
-  deps. You may need to `npm install npm` after updating node.
+  deps. You may need to `npm install -g npm` after updating node.
 * Once you have that install the deps with `npm install`.
 * To fire things up use `npm run dev`.
 
