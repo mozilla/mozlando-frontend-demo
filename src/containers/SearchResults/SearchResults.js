@@ -1,21 +1,18 @@
+import DocumentMeta from 'react-document-meta';
 import React, { Component } from 'react';
 import config from '../../config';
 
-
 export default class SearchResults extends Component {
 
-
   render() {
-    const styles = require('./Home.scss');
+    const styles = require('./SearchResults.scss');
 
     return (
-      <div className={styles.home}>
-        <div className={styles.masthead}>
-          <div className="container">
-            <h1>Search Results</h1>
-          </div>
+      <div className={styles.searchResults + ' container'}>
+        <DocumentMeta title={config.app.title + ': Search Results'}/>
+        <div className="container">
+          <h1>Search Results</h1>
         </div>
-        <div className="container"></div>
       </div>
     );
   }

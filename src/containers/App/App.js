@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, NavBrand, Nav, NavItem, CollapsibleNav } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { SearchForm } from '../../components';
 import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
@@ -64,14 +64,14 @@ export default class App extends Component {
       <div className={styles.app}>
         <DocumentMeta {...config.app}/>
         <Navbar fixedTop toggleNavKey={0}>
-          <NavBrand>
+          <Navbar.Brand>
             <IndexLink to="/" className={styles.navbar} activeStyle={{color: '#666'}}>
               <div className={styles.brand}/>
               <span>{config.app.title}</span>
             </IndexLink>
-          </NavBrand>
+          </Navbar.Brand>
 
-          <CollapsibleNav eventKey={0}>
+          <Navbar.Collapse eventKey={0}>
             <Nav navbar>
               {!user &&
               <LinkContainer to="/login">
@@ -101,7 +101,7 @@ export default class App extends Component {
                 <i className="fa fa-github"/>
               </NavItem>
             </Nav>
-          </CollapsibleNav>
+          </Navbar.Collapse>
         </Navbar>
 
         <div className={styles.appContent}>
