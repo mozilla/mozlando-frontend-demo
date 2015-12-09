@@ -22,7 +22,8 @@ export default class SearchForm extends Component {
         <div className="form-group">
           <label htmlFor="search" className="sr-only">Search</label>
           <input className="form-control" id="search" type="search" placeholder="e.g: privacy" {...q} />
-          <button className="btn btn-primary" type="submit">Submit</button>
+          {' '}
+          <button onClick={this.handleSubmit} className="btn btn-primary" type="submit">Submit</button>
         </div>
       </form>
     );

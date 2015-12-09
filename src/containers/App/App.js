@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, NavBrand, Nav, NavItem, CollapsibleNav } from 'react-bootstrap';
+import { SearchForm } from '../../components';
 import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { InfoBar } from 'components';
 import { pushState } from 'redux-router';
 import connectData from 'helpers/connectData';
 import config from '../../config';
@@ -53,6 +53,10 @@ export default class App extends Component {
     this.props.logout();
   }
 
+  handleSubmit(event) {
+    window.alert('Data submitted! ' + JSON.stringify(event));
+  }
+
   render() {
     const {user} = this.props;
     const styles = require('./App.scss');
@@ -79,10 +83,20 @@ export default class App extends Component {
                   Logout
                 </NavItem>
               </LinkContainer>}
+
+
             </Nav>
+
+            <Nav navbar pullRight>
+              <Navbar.Form>
+                <SearchForm onSubmit={this.handleSubmit}/>
+              </Navbar.Form>
+            </Nav>
+
+
             {user &&
             <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
-            <Nav navbar right>
+            <Nav navbar pullRight>
               <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/mozilla/mozlando-frontend-demo">
                 <i className="fa fa-github"/>
               </NavItem>
@@ -93,7 +107,6 @@ export default class App extends Component {
         <div className={styles.appContent}>
           {this.props.children}
         </div>
-        <InfoBar/>
       </div>
     );
   }
