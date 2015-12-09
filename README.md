@@ -1,5 +1,7 @@
 # Mozlando Frontend Demo
 
+Original sample code is on [erikras/react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example/).
+
 This is an experiment to test out what Redux + React + universal JS looks
 like as a demo Addons front-end.
 
