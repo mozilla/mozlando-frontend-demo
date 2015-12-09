@@ -7,6 +7,7 @@ import {
     Login,
     LoginSuccess,
     NotFound,
+    SearchResults,
   } from 'containers';
 
 export default (store) => {
@@ -39,6 +40,8 @@ export default (store) => {
       <Route onEnter={requireLogin}>
         <Route path="loginSuccess" component={LoginSuccess}/>
       </Route>
+      { /* Routes */ }
+      <Route path="search" component={SearchResults}/>
 
       { /* Routes */ }
       <Route path="login" component={Login}/>

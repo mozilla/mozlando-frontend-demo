@@ -53,8 +53,8 @@ export default class App extends Component {
     this.props.logout();
   }
 
-  handleSubmit(event) {
-    window.alert('Data submitted! ' + JSON.stringify(event));
+  handleSubmit = (data) => {
+    this.props.pushState(null, 'search', data);
   }
 
   render() {
