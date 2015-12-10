@@ -1,0 +1,22 @@
+.addonresult {
+  margin: 1em;
+  padding: 1em;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+
+  h2 {
+    margin: 0;
+  }
+
+  .meta {
+    margin-top: 10px;
+  }
+
+  .resultimage {
+    width: 64px;
+    height: 64px;
+    float: left;
+    padding: 0 10px 10px 0;
+  }
+}

@@ -6,3 +6,4 @@
  */
 
 export SearchForm from './SearchForm/SearchForm';
+export AddonResult from './AddonResult/AddonResult';
