@@ -24,7 +24,8 @@ function fetchData(getState, dispatch) {
 
 @connectData(fetchData)
 @connect(
-  state => ({user: state.auth.user}),
+  state => ({user: state.auth.user,
+             query: state.searchResults.data.query}),
   {logout, pushState})
 export default class App extends Component {
   static propTypes = {
@@ -89,7 +90,7 @@ export default class App extends Component {
 
             <Nav navbar pullRight>
               <Navbar.Form>
-                <SearchForm onSubmit={this.handleSubmit}/>
+                <SearchForm onSubmit={this.handleSubmit} query={this.props.query}/>
               </Navbar.Form>
             </Nav>
 
