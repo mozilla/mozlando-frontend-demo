@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import { pushState } from 'react-router';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 
+
+@connect(null, {pushState})
 export default class Addon extends Component {
 
   static propTypes = {
@@ -10,11 +13,12 @@ export default class Addon extends Component {
     name: PropTypes.string,
     slug: PropTypes.string,
     summary: PropTypes.string,
+    pushState: PropTypes.func.isRequired,
   }
 
   handleGetDetails = (event) => {
     event.preventDefault();
-    pushState(null, 'addon',  {slug: this.props.slug});
+    this.props.pushState(null, `addon/${this.props.slug}`);
   }
 
   createSummary() {
@@ -22,21 +26,17 @@ export default class Addon extends Component {
   }
 
   render() {
-    const {icons, name, slug} = this.props;
+    const {icons, installLink, name, slug} = this.props;
     const styles = require('./AddonResult.scss');
 
     return (
-      <div className={styles.addonresult} onClick={this.handleClick}>
+      <div className={styles.addonresult + ' clickable'} onClick={this.handleGetDetails}>
         <h2>{name}</h2>
         <div className={styles.meta}>
           <img className={styles.resultimage} src={icons[64]} />
           <p dangerouslySetInnerHTML={this.createSummary()}></p>
-          <form action={installLink} method="get">
-            <button className="btn btn-success pull-right" type="submit">Add to Firefox</button>
-          </form>
-          <form className={'jsonly'} action={'/addon/' + slug + '?src=search'} method="get">
-            <button className="btn btn-primary pull-right" type="submit">View Details</button>
-          </form>
+          <a href={installLink} className="btn btn-success pull-right">Add to Firefox</a>
+          <a href={'/addon/' + slug} className="jsonlyib btn btn-primary pull-right">View Details</a>
         </div>
       </div>
     );

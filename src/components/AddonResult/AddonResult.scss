@@ -17,8 +17,9 @@
 
   .meta {
     margin-top: 10px;
-    button {
-      margin-left: 5px;
+
+    a {
+      margin-left: 5px !important;
     }
   }
 
@@ -28,4 +29,8 @@
     float: left;
     padding: 0 10px 10px 0;
   }
+}
+
+.jsonlyib {
+  display: inline-block !important;
 }
