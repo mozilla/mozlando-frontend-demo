@@ -12,7 +12,7 @@ export function isLoaded(globalState, query) {
 export function load(query) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: () => fetch(`${API_HOST}/api/v3/addons/search/?q=${query}`)
+    promise: () => fetch(`${API_HOST}/api/v3/addons/?q=${query}`)
       .then((response) => response.json())
       .then((result) => ({query, result})),
   };
