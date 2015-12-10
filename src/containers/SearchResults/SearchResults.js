@@ -6,53 +6,40 @@ import {initializeWithKey} from 'redux-form';
 
 import connectData from 'helpers/connectData';
 import * as searchResultsActions from 'redux/modules/searchResults';
-
 import {connect} from 'react-redux';
 import config from '../../config';
-
 import 'isomorphic-fetch';
-
-
-const LOAD_SUCCESS = 'mozlando-example/search-results/LOAD_SUCCESS';
-const LOAD_FAIL = 'mozlando-example/search-results/LOAD_FAIL';
-
-const API_HOST = 'https://addons-dev.allizom.org';
-
-function isLoaded(globalState) {
-  return globalState.searchResults && globalState.searchResults.loaded;
-}
-
-function loadSearchResults(dispatch, query) {
-  fetch(`${API_HOST}/api/v3/addons/search/?q=${query}`)
-    .then((response) => {
-      console.log(response);
-      return response.json();
-    })
-    .then((data) => dispatch({type: LOAD_SUCCESS, results: data}))
-    .catch((error) => dispatch({type: LOAD_FAIL, error: error}));
-}
+import {isLoaded, load as loadSearchResults} from 'redux/modules/searchResults';
 
 function fetchDataDeferred(getState, dispatch) {
   const state = getState();
   if (!isLoaded(state)) {
-    loadSearchResults(dispatch, state.router.location.query.q);
+    return dispatch(loadSearchResults(state.router.location.query.q));
   }
 }
 
 @connectData(null, fetchDataDeferred)
 @connect(
   state => ({
-    searchResults: state.searchResults,
+    searchResults: state.searchResults.data,
+    editing: state.searchResults.editing,
+    error: state.searchResults.error,
+    loading: state.searchResults.loading,
   }),
   {...searchResultsActions, initializeWithKey})
 export default class SearchResults extends Component {
   static propTypes = {
-    searchResults: PropTypes.array.isRequired,
+    searchResults: PropTypes.array,
   };
 
   render() {
     const styles = require('./SearchResults.scss');
-    const {searchResults} = this.props;
+    let {searchResults} = this.props;
+    console.log(this.props);
+
+    if (searchResults === undefined) {
+      searchResults = [];
+    }
 
     return (
       <div className={styles.searchresults + ' container'}>
