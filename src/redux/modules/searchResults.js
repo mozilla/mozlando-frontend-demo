@@ -31,7 +31,6 @@ export default function searchResults(state = initialState, action) {
         loading: true,
       };
     case LOAD_SUCCESS:
-      console.log(action);
       return {
         ...state,
         loaded: true,

@@ -35,7 +35,6 @@ export default class SearchResults extends Component {
   render() {
     const styles = require('./SearchResults.scss');
     let {searchResults} = this.props;
-    console.log(this.props);
 
     if (searchResults === undefined) {
       searchResults = [];
