@@ -5,6 +5,7 @@ import auth from './auth';
 import {reducer as form} from 'redux-form';
 import info from './info';
 import searchResults from './searchResults';
+import addon from './addon';
 
 export default combineReducers({
   router: routerStateReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   form,
   info,
   searchResults,
+  addon,
 });

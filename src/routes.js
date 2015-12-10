@@ -8,6 +8,7 @@ import {
     LoginSuccess,
     NotFound,
     SearchResults,
+    AddonDetail,
   } from 'containers';
 
 export default (store) => {
@@ -42,6 +43,7 @@ export default (store) => {
       </Route>
       { /* Routes */ }
       <Route path="search" component={SearchResults}/>
+      <Route path="addon/:slug" component={AddonDetail}/>
 
       { /* Routes */ }
       <Route path="login" component={Login}/>
