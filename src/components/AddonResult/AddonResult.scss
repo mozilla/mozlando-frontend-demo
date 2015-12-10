@@ -1,9 +1,15 @@
 .addonresult {
+
+  &:hover {
+    background: #eee;
+  }
+
   margin: 1em;
   padding: 1em;
-  border-radius: 3px;
-  border: 1px solid #ccc;
+  border-radius: 5px;
+  border: 1px solid #eee;
   overflow: hidden;
+  background: #f6f6f6;
 
   h2 {
     margin: 0;
@@ -11,6 +17,9 @@
 
   .meta {
     margin-top: 10px;
+    button {
+      margin-left: 5px;
+    }
   }
 
   .resultimage {

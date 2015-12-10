@@ -6,14 +6,15 @@ export default class Addon extends Component {
   static propTypes = {
     // description: PropTypes.string,
     icons: PropTypes.object,
+    installLink: PropTypes.string,
     name: PropTypes.string,
     slug: PropTypes.string,
     summary: PropTypes.string,
   }
 
-  handleClick = (event) => {
+  handleGetDetails = (event) => {
     event.preventDefault();
-    pushState('addon');
+    pushState(null, 'addon',  {slug: this.props.slug});
   }
 
   createSummary() {
@@ -30,7 +31,7 @@ export default class Addon extends Component {
         <div className={styles.meta}>
           <img className={styles.resultimage} src={icons[64]} />
           <p dangerouslySetInnerHTML={this.createSummary()}></p>
-          <form action={'/addon/install/' + slug + '?src=search'} method="get">
+          <form action={installLink} method="get">
             <button className="btn btn-success pull-right" type="submit">Add to Firefox</button>
           </form>
           <form className={'jsonly'} action={'/addon/' + slug + '?src=search'} method="get">
