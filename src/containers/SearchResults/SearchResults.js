@@ -13,15 +13,17 @@ import {isLoaded, load as loadSearchResults} from 'redux/modules/searchResults';
 
 function fetchDataDeferred(getState, dispatch) {
   const state = getState();
-  if (!isLoaded(state)) {
-    return dispatch(loadSearchResults(state.router.location.query.q));
+  const query = state.router.location.query.q;
+  if (!isLoaded(state, query)) {
+    return dispatch(loadSearchResults(query));
   }
 }
 
 @connectData(null, fetchDataDeferred)
 @connect(
   state => ({
-    searchResults: state.searchResults.data,
+    searchResults: state.searchResults.data.result,
+    query: state.searchResults.data.query,
     editing: state.searchResults.editing,
     error: state.searchResults.error,
     loading: state.searchResults.loading,
@@ -34,11 +36,7 @@ export default class SearchResults extends Component {
 
   render() {
     const styles = require('./SearchResults.scss');
-    let {searchResults} = this.props;
-
-    if (searchResults === undefined) {
-      searchResults = [];
-    }
+    const {searchResults} = this.props;
 
     return (
       <div className={styles.searchresults + ' container'}>

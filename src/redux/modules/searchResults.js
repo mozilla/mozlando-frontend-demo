@@ -3,22 +3,25 @@ export const LOAD_SUCCESS = 'mozlando-example/search-results/LOAD_SUCCESS';
 export const LOAD_FAIL = 'mozlando-example/search-results/LOAD_FAIL';
 const API_HOST = 'https://addons-dev.allizom.org';
 
-export function isLoaded(globalState) {
-  return globalState.searchResults && globalState.searchResults.loaded;
+export function isLoaded(globalState, query) {
+  return globalState.searchResults &&
+    globalState.searchResults.data.query === query &&
+    globalState.searchResults.loaded;
 }
 
 export function load(query) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: () => fetch(`${API_HOST}/api/v3/addons/search/?q=${query}`)
-      .then((response) => response.json()),
+      .then((response) => response.json())
+      .then((result) => ({query, result})),
   };
 }
 
 const initialState = {
   loaded: false,
   editing: {},
-  data: [],
+  data: {result: [], query: null},
   saveError: {}
 };
 
@@ -36,7 +39,6 @@ export default function searchResults(state = initialState, action) {
         loaded: true,
         loading: false,
         data: action.result,
-
         error: null,
       };
     case LOAD_FAIL:
