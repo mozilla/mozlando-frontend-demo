@@ -1,15 +1,17 @@
+@import "../../theme/variables.scss";
+
 .addonresult {
 
   &:hover {
-    background: #eee;
+    background: $module-background-hover;
   }
 
   margin: 1em;
   padding: 1em;
   border-radius: 5px;
-  border: 1px solid #eee;
+  border: 1px solid $module-border;
   overflow: hidden;
-  background: #f6f6f6;
+  background: $module-background;
 
   h2 {
     margin: 0;

@@ -32,10 +32,11 @@ export default class AddonDetail extends Component {
     const styles = require('./AddonDetail.scss');
     const {addon, slug} = this.props;
     return (
-      <div className={styles.addondetails + ' container'}>
-        <h1>Details for {addon && addon.name} ({slug})</h1>
-        <a href={addon && addon.download_url}>Install</a>
+      <div className={styles.addondetail + ' container'}>
+        <h1>{addon && addon.name || slug}</h1>
+        <img width="64" height="64" src={addon.icons['64']} />
         <p>{addon && addon.description}</p>
+        <a className="btn btn-success pull-right" href={addon && addon.download_url}>Install</a>
       </div>
     );
   }

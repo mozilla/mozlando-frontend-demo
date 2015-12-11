@@ -1,5 +1,7 @@
+@import "../../theme/variables.scss";
+
 .searchlist {
   margin: 0 auto;
-  max-width: 960px;
+  max-width: $large-width;
   list-style-type: none;
 }
