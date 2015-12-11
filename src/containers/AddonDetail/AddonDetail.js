@@ -20,24 +20,38 @@ function fetchDataDeferred(getState, dispatch) {
   state => ({
     addon: state.addon.data,
     slug: state.router.params.slug,
+    loading: state.addon.loading,
   }),
   {...addonActions, initializeWithKey})
 export default class AddonDetail extends Component {
   static propTypes = {
     slug: PropTypes.string.isRequired,
     addon: PropTypes.object,
+    loading: PropTypes.bool,
   };
 
-  render() {
+  renderDetail() {
+    let result;
+    const nyan = require('../nyan.gif');
+    const {loading, addon, slug} = this.props;
     const styles = require('./AddonDetail.scss');
-    const {addon, slug} = this.props;
-    return (
-      <div className={styles.addondetail + ' container'}>
+
+    const nyanImg = <img className={styles.nyan} src={nyan} />;
+
+    if (loading) {
+      result = nyanImg;
+    } else {
+      result = (<div className={styles.addondetail + ' container'}>
         <h1>{addon && addon.name || slug}</h1>
         <img width="64" height="64" src={addon.icons['64']} />
-        <p>{addon && addon.description}</p>
+        <p dangerouslySetInnerHTML={{__html: addon.description}}></p>
         <a className="btn btn-success pull-right" href={addon && addon.download_url}>Install</a>
-      </div>
-    );
+      </div>);
+    }
+    return result;
+  }
+
+  render() {
+    return (<div>{this.renderDetail()}</div>);
   }
 }

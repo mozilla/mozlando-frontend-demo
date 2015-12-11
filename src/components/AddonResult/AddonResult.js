@@ -21,21 +21,21 @@ export default class Addon extends Component {
     this.props.pushState(null, `addon/${this.props.slug}`);
   }
 
-  createSummary() {
-    return {__html: this.props.summary};
+  handleDownload = (event) => {
+    event.stopPropagation();
   }
 
   render() {
-    const {download_url, icons, name, slug} = this.props;
+    const {download_url, icons, name, slug, summary} = this.props;
     const styles = require('./AddonResult.scss');
 
     return (
       <div className={styles.addonresult + ' clickable'} onClick={this.handleGetDetails}>
         <h2>{name}</h2>
         <div className={styles.meta}>
-          <img className={styles.resultimage} src={icons[64]} />
-          <p dangerouslySetInnerHTML={this.createSummary()}></p>
-          <a href={download_url} className="btn btn-success pull-right">Add to Firefox</a>
+          <img width="64" height="64" className={styles.resultimage} src={icons[64]} />
+          <p dangerouslySetInnerHTML={{__html: summary}}></p>
+          <a onClick={this.handleDownload} href={download_url} className="btn btn-success pull-right">Add to Firefox</a>
           <a href={'/addon/' + slug} className="jsonlyib btn btn-primary pull-right">View Details</a>
         </div>
       </div>

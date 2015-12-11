@@ -5,3 +5,18 @@
   max-width: $large-width;
   list-style-type: none;
 }
+
+.nyan {
+  display: block;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+}
+
+.noresults {
+  p {
+    text-align: center;
+  }
+}

@@ -32,24 +32,47 @@ function fetchDataDeferred(getState, dispatch) {
 export default class SearchResults extends Component {
   static propTypes = {
     searchResults: PropTypes.array,
+    loading: PropTypes.bool,
   };
 
-  render() {
-    const styles = require('./SearchResults.scss');
-    const {searchResults} = this.props;
 
+  renderResults() {
+    let result;
+    const nyan = require('../nyan.gif');
+    const styles = require('./SearchResults.scss');
+    const {loading, searchResults} = this.props;
+
+    const nyanImg = <img className={styles.nyan} src={nyan} />;
+
+    if (loading) {
+      result = nyanImg;
+    } else {
+      if (Object.keys(searchResults).length) {
+        result = (<div className={styles.searchresults + ' container'}>
+          <DocumentMeta title={config.app.title + ': Search Results'}/>
+          <div className="container">
+            <h1 className={styles.title}>Search Results</h1>
+            <ul className={styles.searchlist}>
+              {searchResults.map(addon => (
+                <li key={addon.slug}><AddonResult {...addon}/></li>
+              ))}
+            </ul>
+          </div>
+        </div>);
+      } else {
+        result = (
+          <div className={styles.noresults}>
+            {nyanImg}
+            <p>No results, Soz!</p>
+          </div>);
+      }
+    }
+    return result;
+  }
+
+  render() {
     return (
-      <div className={styles.searchresults + ' container'}>
-        <DocumentMeta title={config.app.title + ': Search Results'}/>
-        <div className="container">
-          <h1>Search Results</h1>
-          <ul className={styles.searchlist}>
-            {searchResults.map(addon => (
-              <li><AddonResult {...addon}/></li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <div>{this.renderResults()}</div>
     );
   }
 }
