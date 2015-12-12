@@ -44,7 +44,7 @@ export default class AddonDetail extends Component {
       result = (<div className={styles.addondetail + ' container'}>
         <h1>{addon && addon.name || slug}</h1>
         <img width="64" height="64" src={addon.icons['64']} />
-        <p dangerouslySetInnerHTML={{__html: addon.description}}></p>
+        <p dangerouslySetInnerHTML={{__html: addon.description.replace(/[\r\n]/g, '<br/>')}}></p>
         <a className="btn btn-success pull-right" href={addon && addon.download_url}>Install</a>
       </div>);
     } else {
