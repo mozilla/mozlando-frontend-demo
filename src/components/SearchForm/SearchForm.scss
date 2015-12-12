@@ -1,3 +1,16 @@
 .searchform {
-  padding: 0 0;
+  width: 100%;
+
+  .formwrapper {
+    display: flex;
+  }
+}
+
+.searchinput {
+  flex: 1 1 auto;
+}
+
+.searchbutton {
+  margin-left: 5px;
+  flex: 0 1 auto;
 }

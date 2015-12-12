@@ -47,10 +47,10 @@ export default class SearchResults extends Component {
     if (loading) {
       result = nyanImg;
     } else {
-      if (Object.keys(searchResults).length) {
-        result = (<div className={styles.searchresults + ' container'}>
+      if (Object.keys(searchResults).length > 0) {
+        result = (<div>
           <DocumentMeta title={config.app.title + ': Search Results'}/>
-          <div className="container">
+          <div>
             <h1 className={styles.title}>Search Results</h1>
             <ul className={styles.searchlist}>
               {searchResults.map(addon => (

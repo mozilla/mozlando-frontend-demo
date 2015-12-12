@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { SearchForm } from '../../components';
 import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
@@ -56,54 +56,31 @@ export default class App extends Component {
   }
 
   handleSubmit = (data) => {
-    this.props.pushState(null, 'search', data);
+    this.props.pushState(null, '/search', data);
   }
 
   render() {
-    const {user} = this.props;
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
         <DocumentMeta {...config.app}/>
-        <Navbar fixedTop toggleNavKey={0}>
-          <Navbar.Brand>
-            <IndexLink to="/" className={styles.navbar} activeStyle={{color: '#666'}}>
-              <div className={styles.brand}/>
-              <span>{config.app.title}</span>
-            </IndexLink>
-          </Navbar.Brand>
+        <Navbar fixedTop>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <IndexLink to="/" className={styles.navbar} activeStyle={{color: '#666'}}>
+                <div className={styles.brand}/>
+                <span>{config.app.title}</span>
+              </IndexLink>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
 
-          <Navbar.Collapse eventKey={0}>
-            <Nav navbar>
-              {!user &&
-              <LinkContainer to="/login">
-                <NavItem eventKey={5}>Login</NavItem>
-              </LinkContainer>}
-              {user &&
-              <LinkContainer to="/logout">
-                <NavItem eventKey={6} className="logout-link" onClick={this.handleLogout}>
-                  Logout
-                </NavItem>
-              </LinkContainer>}
-
-
-            </Nav>
-
-            <Nav navbar pullRight>
-              <Navbar.Form>
-                <SearchForm onSubmit={this.handleSubmit} query={this.props.query}/>
-              </Navbar.Form>
-            </Nav>
-
-
-            {user &&
-            <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
-            <Nav navbar pullRight>
-              <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/mozilla/mozlando-frontend-demo">
-                <i className="fa fa-github"/>
-              </NavItem>
-            </Nav>
+          <Navbar.Collapse>
+            <Navbar.Form pullRight>
+              <SearchForm onSubmit={this.handleSubmit} query={this.props.query}/>
+            </Navbar.Form>
           </Navbar.Collapse>
+
         </Navbar>
 
         <div className={styles.appContent}>

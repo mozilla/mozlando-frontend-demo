@@ -20,11 +20,9 @@ export default class SearchForm extends Component {
 
     return (
       <form className={styles.searchform + ' form-inline'} action="/search" method="GET" onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className={styles.formwrapper + ' form-group'}>
           <label htmlFor="search" className="sr-only">Search</label>
-          <input value={query} className="form-control" id="search" type="search" placeholder="e.g: privacy" {...q}/>
-          {' '}
-          <button className="btn btn-primary" type="submit">Submit</button>
+          <input value={query} className={styles.searchinput + ' form-control'} id="search" type="search" placeholder="e.g: privacy" {...q}/><button className={styles.searchbutton + ' btn btn-primary'} type="submit">Submit</button>
         </div>
       </form>
     );

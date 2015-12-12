@@ -40,13 +40,19 @@ export default class AddonDetail extends Component {
 
     if (loading) {
       result = nyanImg;
-    } else {
+    } else if (addon) {
       result = (<div className={styles.addondetail + ' container'}>
         <h1>{addon && addon.name || slug}</h1>
         <img width="64" height="64" src={addon.icons['64']} />
         <p dangerouslySetInnerHTML={{__html: addon.description}}></p>
         <a className="btn btn-success pull-right" href={addon && addon.download_url}>Install</a>
       </div>);
+    } else {
+      result = (
+        <div className={styles.noresults}>
+          {nyanImg}
+          <p>No results, Soz!</p>
+        </div>);
     }
     return result;
   }

@@ -5,7 +5,11 @@
 
 .navbar-brand {
   position: relative;
-  padding-left: 50px;
+}
+
+.container {
+  width: 100%;
+  margin: 0;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -13,6 +17,10 @@
 .navbar-default .navbar-nav > .active > a:focus {
   color: #33e0ff;
   background-color: transparent;
+}
+
+.navbar-form {
+  border: none !important;
 }
 
 .jsonlyib {

@@ -4,11 +4,13 @@
   margin: 0 auto;
   max-width: $large-width;
   list-style-type: none;
+  padding: 0;
 }
 
 .nyan {
   display: block;
   margin: 0 auto;
+  max-width: 100%;
 }
 
 .title {
