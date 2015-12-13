@@ -34,7 +34,7 @@ export default class Addon extends Component {
         <h2>{name}</h2>
         <div className={styles.meta}>
           <img width="64" height="64" className={styles.resultimage} src={icons[64]} />
-          <p dangerouslySetInnerHTML={{__html: summary}.replace(/[\r\n]/g, '<br/>')}></p>
+          <p dangerouslySetInnerHTML={{__html: summary.replace(/[\r\n]/g, '<br/>')}}></p>
           <a onClick={this.handleDownload} href={download_url} className="btn btn-success pull-right">Add to Firefox</a>
           <a href={'/addon/' + slug} className="jsonlyib btn btn-primary pull-right">View Details</a>
         </div>
