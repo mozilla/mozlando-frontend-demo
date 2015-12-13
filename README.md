@@ -18,5 +18,16 @@ The idea to it to try and do the following:
   deps. You may need to `npm install -g npm` after updating node.
 * Once you have that install the deps with `npm install`.
 * To fire things up use `npm run dev`.
+* The redux devtools can be shown with `ctrl+shift+h`.
 
+## Building for full universal functionality
 
+CSS for example only fully works with JS when running the dev server.
+
+To see the built-code running fully as a universal app you can built and run
+it in production mode with:
+
+```
+npm run build
+npm run start
+```
