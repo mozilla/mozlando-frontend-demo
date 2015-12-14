@@ -30,7 +30,7 @@ it in production mode with:
 
 ```
 npm run build
-npm run start
+PORT=8080 npm run start
 ```
 
 ## Deploying to Heroku
