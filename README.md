@@ -20,9 +20,10 @@ The idea to it to try and do the following:
 * To fire things up use `npm run dev`.
 * The redux devtools can be shown with `ctrl+shift+h`.
 
-## Building for full universal functionality
+## Running the production version.
 
-CSS for example only fully works with JS when running the dev server.
+The CSS only fully works with JS when running the dev server. To see it
+without JS you'll need to build it for production.
 
 To see the built-code running fully as a universal app you can built and run
 it in production mode with:
@@ -31,3 +32,12 @@ it in production mode with:
 npm run build
 npm run start
 ```
+
+## Deploying to Heroku
+
+* Set `heroku config:set NPM_CONFIG_PRODUCTION=false` to install dev deps.
+* Push to heroku:master
+
+## Demo Site
+
+See https://mozlando-frontend-demo.herokuapp.com/
