@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/server';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
-import httpProxy from 'http-proxy';
+// import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
@@ -24,9 +24,18 @@ import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
-const proxy = httpProxy.createProxyServer({
-  target: 'http://' + config.apiHost + ':' + config.apiPort,
-  ws: true
+
+// const proxy = httpProxy.createProxyServer({
+//  target: 'http://' + config.apiHost + ':' + config.apiPort,
+//  ws: true
+//});
+
+app.use(function (req, res, next) {
+  if (req.header('x-forwarded-proto') == 'http') {
+    res.redirect(301, 'https://mozlando-frontend-demo.herokuapp.com' + req.url)
+    return
+  }
+  next();
 });
 
 app.use(compression());
@@ -35,23 +44,23 @@ app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
-app.use('/api', (req, res) => {
-  proxy.web(req, res);
-});
+// app.use('/api', (req, res) => {
+//  proxy.web(req, res);
+// });
 
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
-proxy.on('error', (error, req, res) => {
-  let json;
-  if (error.code !== 'ECONNRESET') {
-    console.error('proxy error', error);
-  }
-  if (!res.headersSent) {
-    res.writeHead(500, {'content-type': 'application/json'});
-  }
-
-  json = {error: 'proxy_error', reason: error.message};
-  res.end(JSON.stringify(json));
-});
+//proxy.on('error', (error, req, res) => {
+//  let json;
+//  if (error.code !== 'ECONNRESET') {
+//    console.error('proxy error', error);
+//  }
+//  if (!res.headersSent) {
+//    res.writeHead(500, {'content-type': 'application/json'});
+//  }
+//
+//  json = {error: 'proxy_error', reason: error.message};
+//  res.end(JSON.stringify(json));
+//});
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
@@ -117,7 +126,7 @@ if (config.port) {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
+    //console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
     console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
   });
 } else {
